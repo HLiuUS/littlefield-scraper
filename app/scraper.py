@@ -19,6 +19,13 @@ def login(driver, username, password):
     driver.find_element_by_name("password").send_keys(password)
     driver.find_element_by_xpath("//input[@value='ok']").click()
     time.sleep(3)
+    try:
+        alert = driver.switch_to.alert
+        alertMessage = alert.text
+        print("Alert Message: ", alertMessage)
+        alert.accept()  # Accepting alert
+    except:
+        pass
 
 
 def without_split(driver, df):
@@ -34,6 +41,7 @@ def without_split(driver, df):
         "Machine 3 Queue": "http://op.responsive.net/Littlefield/Plot?data=S3Q&x=all",
     }
     for key, value in required.items():
+        time.sleep(1)
         driver.get(value)
         driver.find_element_by_name("data").click()
         soup = BeautifulSoup(driver.page_source, "html.parser")

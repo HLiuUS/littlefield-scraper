@@ -5,7 +5,7 @@ from config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)
-app.template_folder = app.config['TEMPLATE_PATH']
+app.template_folder = app.config["TEMPLATE_PATH"]
 bootstrap = Bootstrap(app)
 
 
