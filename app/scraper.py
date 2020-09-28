@@ -14,11 +14,11 @@ class LoginForm(FlaskForm):
 
 
 def login(driver, username, password):
-    time.sleep(2)
+    time.sleep(1)
     driver.find_element_by_name("id").send_keys(username)
     driver.find_element_by_name("password").send_keys(password)
     driver.find_element_by_xpath("//input[@value='ok']").click()
-    time.sleep(3)
+    time.sleep(1)
     try:
         alert = driver.switch_to.alert
         alertMessage = alert.text
@@ -41,7 +41,7 @@ def without_split(driver, df):
         "Machine 3 Queue": "http://op.responsive.net/Littlefield/Plot?data=S3Q&x=all",
     }
     for key, value in required.items():
-        time.sleep(1)
+        time.sleep(0.1)
         driver.get(value)
         driver.find_element_by_name("data").click()
         soup = BeautifulSoup(driver.page_source, "html.parser")
@@ -92,6 +92,7 @@ def split_category(driver, df):
         "Avg Revenue Tier ": "http://op.responsive.net/Littlefield/Plot?data=JOBREV&x=all",
     }
     for key, value in required.items():
+        time.sleep(0.1)
         driver.get(value)
         driver.find_element_by_name("data").click()
         soup = BeautifulSoup(driver.page_source, "html.parser")
