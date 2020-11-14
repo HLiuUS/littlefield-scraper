@@ -47,33 +47,33 @@ def without_split(driver, df):
         soup = BeautifulSoup(driver.page_source, "html.parser")
         data_ls = soup.find_all("td")[2:]
         data = list()
-        if key == "Inventory Level":
-            current = None
-            last = len(data_ls) - 2
-            for i in range(len(data_ls)):
-                if i % 2 == 0:
-                    if i == last:
-                        text = "".join(data_ls[i + 1].text.split(","))
-                        append_type(data, text)
-                    elif current == round(float(data_ls[i].text)):
-                        pass
-                    elif round(float(data_ls[i].text)) != current:
-                        text = "".join(data_ls[i - 1].text.split(","))
-                        append_type(data, text)
-                    current = round(float(data_ls[i].text))
-                else:
-                    pass
+        # if key == "Inventory Level":
+        #     current = None
+        #     last = len(data_ls) - 2
+        #     for i in range(len(data_ls)):
+        #         if i % 2 == 0:
+        #             if i == last:
+        #                 text = "".join(data_ls[i + 1].text.split(","))
+        #                 append_type(data, text)
+        #             elif current == round(float(data_ls[i].text)):
+        #                 pass
+        #             elif round(float(data_ls[i].text)) != current:
+        #                 text = "".join(data_ls[i - 1].text.split(","))
+        #                 append_type(data, text)
+        #             current = round(float(data_ls[i].text))
+        #         else:
+        #             pass
 
-        else:
-            for i in range(len(data_ls)):
-                if i % 2 == 0:
-                    text = "".join(data_ls[i + 1].text.split(","))
-                    try:
-                        data.append(int(text))
-                    except:
-                        data.append(float(text))
-                else:
-                    pass
+        # else:
+        for i in range(len(data_ls)):
+            if i % 2 == 0:
+                text = "".join(data_ls[i + 1].text.split(","))
+                try:
+                    data.append(int(text))
+                except:
+                    data.append(float(text))
+            else:
+                pass
         df[key] = data
     return df
 
